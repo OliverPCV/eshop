@@ -1,0 +1,14 @@
+<div class="container">
+<h1>{{name}}</h1>
+<p>{{description}}</p>
+  <div class="card" style="width: 18rem;" *ngFor="let product of productArr">
+    <img class="card-img-top" src="http://kodytek.cz:8080/rest-api/assets/products/9439897e-f933-4b81-8a1a-df718e40e425.jpg" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">{{product.title}}</h5>
+      <p class="card-text">{{product.price}}</p>
+      <a href="#" class="btn btn-primary">Go somewhere</a>
+    </div>
+  </div>
+</div>
+
+

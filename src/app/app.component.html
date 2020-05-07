@@ -1,0 +1,10 @@
+<nav class="navbar navbar-expand-sm  bg-orange navbar-dark">
+  <a class="navbar-brand" routerLink="">P1cuz</a>
+  <ul class="navbar-nav mx-auto">
+    <li class="nav-item " *ngFor="let cat of category">
+      <a class="nav-link text-dark" routerLink="/category" (click)="clickCategory(cat.id)">{{cat.name}}</a>
+    </li>
+  </ul>
+</nav>
+
+<router-outlet></router-outlet>
