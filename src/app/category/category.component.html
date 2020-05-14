@@ -1,14 +1,22 @@
 <div class="container">
 <h1>{{name}}</h1>
 <p>{{description}}</p>
-  <div class="card" style="width: 18rem;" *ngFor="let product of productArr">
-    <img class="card-img-top" src="http://kodytek.cz:8080/rest-api/assets/products/9439897e-f933-4b81-8a1a-df718e40e425.jpg" alt="Card image cap">
+  <div class="d-flex flex-row flex-wrap container">
+  <div class="card my-3 mx-3" style="width: 18rem;" *ngFor="let product of productArr">
+    <img class="card-img-top" [src]="'http://kodytek.cz:8080/rest-api/' + product.images[0].miniaturePath" alt="Card image cap">
     <div class="card-body">
       <h5 class="card-title">{{product.title}}</h5>
-      <p class="card-text">{{product.price}}</p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
+      <h3>{{ratingNumber}}</h3>
+      <p class="card-text">{{product.price / 100}} kaček bráško</p>
+      <a class="btn btn-orange" (click)="getProduct(product.id)">Zobrazit produkt :)</a>
     </div>
   </div>
+  </div>
+  <div class=" container" *ngIf="productArr.length === 0">
+    <h3>Nothing is skladem gg ez clap</h3>
+  </div>
 </div>
+
+
 
 

@@ -12,15 +12,14 @@ export class ProductsService {
 
   constructor(public http: HttpClient) { }
 
-  getProduct() {
+  getProduct(id: number) {
     const headers = new HttpHeaders().set('access-token', Host.token);
 
-    return this.http.get<Product[]>('/api/products', {headers});
+    return this.http.get<Product>('/api/products/' + id, {headers});
   }
 
-  getImage() {
+  getProductRating() {
 
-    return this.http.get<Images[]>('/assets/products');
   }
 }
 

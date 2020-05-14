@@ -1,0 +1,20 @@
+<div class="container" *ngIf="product">
+  <h1>{{product.title}}</h1>
+  <p>{{product.description}}</p>
+  <p *ngIf="ratings.length"><strong>Average rating : </strong>{{avgRatingsNumber}}%</p>
+  <p *ngIf="ratings.length == 0"><strong>Average rating : </strong> žádné hodnocení</p>
+  <p><strong>Units on stock : </strong>{{product.unitsOnStock}}</p>
+  <img class=" image card-img-top" [src]="'http://kodytek.cz:8080/rest-api/' + product.images[0].miniaturePath" alt="Card image cap">
+  <div class="d-flex flex-row flex-wrap container">
+  <div class="card my-3 mx-3" style="width: 18rem;" *ngFor="let rating of ratings">
+    <div class="card-body">
+      <h3 class="card-title">{{rating.fullName}}'s rating</h3>
+      <h3 *ngIf="rating.fullName == ''">Anonymous </h3>
+      <h5><strong>Users rating : </strong>{{rating.percent}}%</h5>
+      <p class="card-text"><strong>Users comment : <br></strong>{{rating.description}}</p>
+    </div>
+  </div>
+  </div>
+</div>
+
+
