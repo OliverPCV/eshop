@@ -2,13 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {CategoriesService} from '../services/categories.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Category} from '../models/Category.model';
 import {CategoryPage} from '../models/CategoryPage.model';
 import {Product} from '../models/Product.model';
 import {ProductsService} from '../services/products.service';
-import {Images} from '../models/Images.model';
 import * as md from 'markdown-it';
-import {Ratings} from "../models/Ratings.model";
 
 @Component({
   selector: 'app-category',
@@ -21,12 +18,9 @@ export class CategoryComponent implements OnInit {
   public description: string;
   public product: Product;
   public productArr: Product[];
-  public ratingOfProduct: number[];
-  public avgRatingsArr: number[];
-  public sum: number;
-  public avgRatingsNumber: Ratings[];
+  public categoryId: number;
   public ratingNumber: number;
-
+  public pagesCount: number;
 
   constructor(private http: HttpClient,
               private category: CategoriesService,
@@ -40,16 +34,30 @@ export class CategoryComponent implements OnInit {
       this.category.getCategory(i.id).subscribe((data: CategoryPage) => {
         console.log(data);
         this.name = data.category.name;
+        this.categoryId = data.category.id;
         this.description = data.category.description;
         this.productArr = data.products;
-        // tslint:disable-next-line:prefer-for-of
-
+        this.pagesCount = data.pagesCount + 1;
         const result = md().renderInline(this.description);
         this.description = result;
-        console.log(this.productArr);
-
       });
     });
+  }
+  get pageCount(): Array<number> {
+    console.log(Array.from(new Array(this.pagesCount).keys()));
+    return Array.from(new Array(this.pagesCount).keys());
+  }
+  loadPage(id: number, page: number) {
+      this.category.getProductPage(id, page).subscribe(
+          (data: CategoryPage) => {
+            console.log(data);
+            this.productArr = data.products;
+
+          }, (error) => {
+
+          }
+        );
+      console.log(page);
   }
 
   getProduct(id: number) {

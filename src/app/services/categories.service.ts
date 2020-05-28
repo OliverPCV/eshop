@@ -16,11 +16,17 @@ export class CategoriesService {
 
     return this.http.get<Category[]>('/api/categories', {headers});
   }
-
   getCategory(id: number) {
     const headers = new HttpHeaders().set('access-token', Host.token);
 
     return this.http.get<CategoryPage>('/api/categories/' + id, {headers});
   }
+  getProductPage(id: number, page: number) {
+    const headers = new HttpHeaders()
+      .set('access-token', Host.token);
+
+    return this.http.get<CategoryPage>('/api/categories/' + id + '/?page=' + page, {headers});
+  }
+
 
 }

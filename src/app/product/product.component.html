@@ -1,17 +1,69 @@
 <div class="container" *ngIf="product">
-  <h1>{{product.title}}</h1>
-  <p>{{product.description}}</p>
-  <p *ngIf="ratings.length"><strong>Average rating : </strong>{{avgRatingsNumber}}%</p>
-  <p *ngIf="ratings.length == 0"><strong>Average rating : </strong> žádné hodnocení</p>
-  <p><strong>Units on stock : </strong>{{product.unitsOnStock}}</p>
+  <div>
+  <h1 class="text-center">{{product.title}}</h1>
+  </div>
+  <div class="text-right">
+    <p *ngIf="ratings.length != 0 "><strong>Average rating : </strong>{{avgRatingsNumber}} %</p>
+    <p   *ngIf="ratings.length == 0"><strong>Average rating : </strong> žádné hodnocení</p>
+    <p><strong>Units on stock : </strong>{{product.unitsOnStock}}</p>
+  </div>
   <img class=" image card-img-top" [src]="'http://kodytek.cz:8080/rest-api/' + product.images[0].miniaturePath" alt="Card image cap">
+  <p [innerHTML]="product.description">{{product.description}}</p>
+
+  <div class="parameters" *ngIf="product.id < 18">
+    <h1 class="text-orange">Parameters</h1>
+    <p><strong>Značka: </strong>{{product.parameters ['Značka']}}</p>
+    <p><strong>Frekvence procesoru: </strong>{{product.parameters ['Frekvence procesoru']}}</p>
+    <p><strong>Hmotnost: </strong>{{product.parameters ['Hmotnost']}}</p>
+    <p><strong>Kapacita SSD: </strong>{{product.parameters ['Kapaciat SSD']}}</p>
+    <p><strong>Model grafické karty: </strong>{{product.parameters ['Model grafické karty']}}</p>
+    <p><strong>Model procesoru: </strong>{{product.parameters ['Model procesor']}}</p>
+    <p><strong>Operační systém: </strong>{{product.parameters ['Operační systém']}}</p>
+    <p><strong>Rozlišení displeje: </strong>{{product.parameters ['Rozlišení displeje']}}</p>
+    <p><strong>Rozměry: </strong>{{product.parameters ['Rozměry']}}</p>
+    <p><strong>Uhlopříčka displeje: </strong>{{product.parameters ['Uhlopříčka displeje']}}</p>
+  </div>
+
+  <div class="parameters" *ngIf="product.id > 17 && product.id < 24">
+    <h1 class="text-orange">Parameters</h1>
+    <p><strong>Značka: </strong>{{product.parameters ['Značka']}}</p>
+    <p><strong>CPU: </strong>{{product.parameters ['CPU']}}</p>
+    <p><strong>GPU: </strong>{{product.parameters ['GPU']}}</p>
+    <p><strong>Rozlišení displeje: </strong>{{product.parameters ['Rozslišení displeje']}}</p>
+    <p><strong>Velikost displeje: </strong>{{product.parameters ['Velkost displeje']}}</p>
+    <p><strong>Wifi: </strong>{{product.parameters ['Wifi']}}</p>
+  </div>
+
+  <div  class="parameters" *ngIf="product.id > 23">
+    <h1 class="text-orange">Parameters</h1>
+    <p><strong>Značka: </strong>{{product.parameters ['Značka']}}</p>
+    <p><strong>CPU: </strong>{{product.parameters ['CPU']}}</p>
+    <p><strong>GPU: </strong>{{product.parameters ['GPU']}}</p>
+    <p><strong>Velikost disku: </strong>{{product.parameters ['Velikost disku']}}</p>
+    <p><strong>Wifi: </strong>{{product.parameters ['Wifi']}}</p>
+  </div>
+
   <div class="d-flex flex-row flex-wrap container">
   <div class="card my-3 mx-3" style="width: 18rem;" *ngFor="let rating of ratings">
     <div class="card-body">
-      <h3 class="card-title">{{rating.fullName}}'s rating</h3>
-      <h3 *ngIf="rating.fullName == ''">Anonymous </h3>
-      <h5><strong>Users rating : </strong>{{rating.percent}}%</h5>
-      <p class="card-text"><strong>Users comment : <br></strong>{{rating.description}}</p>
+      <h3 class="card-title text-orange"*ngIf="rating.fullName != null">{{rating.fullName}}'s rating</h3>
+      <h3 class="card-title text-orange"*ngIf="rating.fullName == null">Anonymous's</h3>
+      <div *ngIf="rating.percent != null">
+        <h4>Users rating : </h4>
+        <p class="card-text " >{{rating.percent}} %</p>
+      </div>
+      <div *ngIf="rating.percent == null">
+      <h4>Users rating : </h4>
+      <p class="card-text text-primary">žádný rating</p>
+      </div>
+      <div *ngIf="rating.description != null">
+        <h4>Users comment : </h4>
+        <p class="card-text" >{{rating.description}}</p>
+      </div>
+      <div *ngIf="rating.description == null">
+        <h4>Users comment : </h4>
+        <p class="card-text text-primary" >žádný koment</p>
+      </div>
     </div>
   </div>
   </div>

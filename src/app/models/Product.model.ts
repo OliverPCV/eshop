@@ -8,7 +8,7 @@ export class Product {
               public unitsOnStock: number,
               public price: number,
               public images: Images,
-              public parametrs: string,
+              public parameters: string,
               public ratings: Ratings[],
               ) {}
 }

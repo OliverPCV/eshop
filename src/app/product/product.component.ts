@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import {CategoryPage} from "../models/CategoryPage.model";
-import {ActivatedRoute} from "@angular/router";
-import {ProductsService} from "../services/products.service";
+import {CategoryPage} from '../models/CategoryPage.model';
+import {ActivatedRoute} from '@angular/router';
+import {ProductsService} from '../services/products.service';
 import {ProductPage} from '../models/ProductPage.model';
 import {Product} from '../models/Product.model';
-import {Ratings} from "../models/Ratings.model";
+import {Ratings} from '../models/Ratings.model';
+import * as md from 'markdown-it';
+
 
 @Component({
   selector: 'app-product',
@@ -30,9 +32,13 @@ export class ProductComponent implements OnInit {
         console.log(data);
         this.product = data;
         this.ratings = data.ratings;
+        this.description = data.description;
         this.avgRatingsArr = this.ratings.map(l => l.percent);
         this.sum = this.avgRatingsArr.reduce((a, b) => a + b, 0);
         this.avgRatingsNumber = this.sum / this.ratings.length;
+
+        const result = md().renderInline(this.product.description);
+        this.product.description = result;
       });
     });
   }
