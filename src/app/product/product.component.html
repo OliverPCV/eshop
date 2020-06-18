@@ -6,6 +6,8 @@
     <p *ngIf="ratings.length != 0 "><strong>Average rating : </strong>{{avgRatingsNumber}} %</p>
     <p   *ngIf="ratings.length == 0"><strong>Average rating : </strong> žádné hodnocení</p>
     <p><strong>Units on stock : </strong>{{product.unitsOnStock}}</p>
+    <button class="btn btn-orange" (click)="addToCart(product.id)" > Přidat do košíku</button>
+
   </div>
   <img class=" image card-img-top" [src]="'http://kodytek.cz:8080/rest-api/' + product.images[0].miniaturePath" alt="Card image cap">
   <p [innerHTML]="product.description">{{product.description}}</p>
@@ -22,6 +24,7 @@
     <p><strong>Rozlišení displeje: </strong>{{product.parameters ['Rozlišení displeje']}}</p>
     <p><strong>Rozměry: </strong>{{product.parameters ['Rozměry']}}</p>
     <p><strong>Uhlopříčka displeje: </strong>{{product.parameters ['Uhlopříčka displeje']}}</p>
+
   </div>
 
   <div class="parameters" *ngIf="product.id > 17 && product.id < 24">

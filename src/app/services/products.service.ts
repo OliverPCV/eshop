@@ -18,6 +18,12 @@ export class ProductsService {
     return this.http.get<Product>('/api/products/' + id, {headers});
   }
 
+  deleteProduct(id: number) {
+    const headers = new HttpHeaders().set('access-token', Host.token);
+
+    return this.http.delete('/api/products/' + id, {headers});
+  }
+
 }
 
 
